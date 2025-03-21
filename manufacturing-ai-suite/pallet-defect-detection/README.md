@@ -27,9 +27,9 @@ Figure 1: Architecture diagram
 
 This reference implementation is built with these components:
 
--   <a href="https://docs.edgeplatform.intel.com/edge-video-analytics-microservice/2.2.0/user-guide/Overview.html">**Edge Video Analytics Microservice (EVAM)**</a> is an interoperable containerized microservice based on Python for video ingestion and deep learning inferencing functions.
+-   <a href="https://docs.edgeplatform.intel.com/edge-video-analytics-microservice/2.3.0/user-guide/Overview.html">**Edge Video Analytics Microservice (EVAM)**</a> is an interoperable containerized microservice based on Python for video ingestion and deep learning inferencing functions.
 -   <a href="https://docs.edgeplatform.intel.com/visualization-microservice/user-guide/Overview.html">**Multimodal Data Visualization Microservice**</a> enables the visualization of video streams and time-series data.
--   <a href="https://docs.edgeplatform.intel.com/model-registry-as-a-service/1.0.1/user-guide/Overview.html">**Model Registry Microservice**</a> provides a centralized repository that facilitates the management of AI models
+-   <a href="https://docs.edgeplatform.intel.com/model-registry-as-a-service/1.0.2/user-guide/Overview.html">**Model Registry Microservice**</a> provides a centralized repository that facilitates the management of AI models
 
 ## Get Started
 
