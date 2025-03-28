@@ -17,10 +17,12 @@
       <button @click="captureScreenshot" :style="{ width: screenshot ? '20%' : '25%' }">Capture Frame</button>
       <button @click="triggerFileUpload" :style="{ width: screenshot ? '20%' : '25%' }">Upload Image</button>
       <input type="file" ref="fileInput" @change="handleFileUpload" style="display: none;" accept="image/*" />
-      <button @click="clearDatabase" :style="{ width: screenshot ? '20%' : '25%' }">Clear Database</button>
-      <div v-if="screenshot">
-        <button @click="cropImage" style="width: 20%" >Search Object</button>
-      </div>
+      <button v-if="screenshot" @click="cropImage" style="width: 20%" >Search Object</button>
+      <button @click="clearDatabase" :style="{ 
+        width: screenshot ? '20%' : '25%',
+        backgroundColor: pipeline ? 'gray' : 'darkorange',
+        border: pipeline ? '1px solid gray' : '1px solid #7f4600e0'
+      }">Clear Database</button>
     </div>
     <div v-if="screenshot" class="screenshot-preview">      
           <vue-cropper
@@ -30,17 +32,23 @@
           />
     </div>
     <div v-if="imageData.length" class="image-list">
-      <h4>Image List:</h4>
-      <div class="datetime-filter">
+      <h4>Search Results:</h4>
+      <div class="filters">
         <label for="from-date">From:</label>
         <input type="datetime-local" id="from-date" v-model="fromDatetime" />
         <label for="to-date">To:</label>
         <input type="datetime-local" id="to-date" v-model="toDatetime" />
+        <label for="sort-by">Sort by:</label>
+        <select id="sort-by" v-model="sortBy">
+          <option value="date">Date</option>
+          <option value="distance">Distance</option>
+          <option value="label">Label</option>
+        </select>
       </div>
       <ul>
-        <li v-for="data in filteredImageData" :key="data.url">
-          <img :src="data.url" :alt="data.url" width="280" height="157.5" />
-          <div style="display: flex; flex-direction: column; margin-left: 3px;">
+        <li v-for="(data, index) in filteredImageData" :key="data.url + '-' + index">
+          <img :src="data.url" :alt="data.url" />
+          <div style="display: flex; flex-direction: column;">
             <span>Distance: {{ data.distance.toFixed(4) }}</span>
             <span>Label: {{ data.label }}</span>
             <span>Timestamp: {{ data.datetime }}</span>
@@ -73,6 +81,7 @@ export default defineComponent({
       imageData: [], // To store the image data
       fromDatetime: '1970-01-01T00:00', // To store the initial datetime to filter
       toDatetime: new Date().toISOString().slice(0, 16), // To store the final datetime to filter
+      sortBy: 'date' // To store the sort by option
     };
   },
   computed: {
@@ -84,7 +93,15 @@ export default defineComponent({
             const to = this.toDatetime ? new Date(this.toDatetime) : null;
             return (!from || date >= from) && (!to || date <= to);
           })
-          .sort((a, b) => b.timestamp - a.timestamp);
+          .sort((a, b) => {
+            if (this.sortBy === 'distance') {
+              return b.distance - a.distance;
+            } else if (this.sortBy === 'label') {
+              return a.label.localeCompare(b.label);
+            }
+            
+            return b.timestamp - a.timestamp;
+          });
     }
   },
   methods: {
@@ -150,14 +167,6 @@ export default defineComponent({
               frame: {
                   type: "rtsp",
                   path: "filter-pipeline"
-              }
-          },
-          parameters: {
-              mqtt_publisher: {
-                  host: "sibi-broker",
-                  port: 1883,
-                  publish_frame: "true",
-                  include_feature_vector: "true"
               }
           }
       };
@@ -244,7 +253,15 @@ export default defineComponent({
             }
           }).filter(url => url !== null));
 
-          this.imageData = results.sort((a, b) => b.timestamp - a.timestamp);
+          this.imageData = results.sort((a, b) => {
+            if (this.sortBy === 'distance') {
+              return b.distance - a.distance;
+            } else if (this.sortBy === 'label') {
+              return a.label.localeCompare(b.label);
+            }
+            
+            return b.timestamp - a.timestamp;
+          });
 
         } catch (error) {
           console.error('Failed to send cropped image:', error);
@@ -283,6 +300,7 @@ body, html {
 }
 
 .screenshot-preview {
+  margin-top: 10px;
   width: 100%; /* Set the width */
   /* height: 157.5px; Set the height */
   /* margin-left:15%;   */
@@ -290,7 +308,7 @@ body, html {
 
 .image-list {
   width: 95%; /* Set a fixed width */
-  height: 50.5%; /* Set a fixed height */
+  height: 59%; /* Set a fixed height */
   overflow-y: auto; /* Enable vertical scrolling */
   padding: 10px; /* Add padding */
 }
@@ -310,19 +328,37 @@ body, html {
   display: flex;
   align-items: center; /* Align items vertically */
   margin-bottom: 2px;
+  width: 100%;
 }
 
-.datetime-filter {
+.image-list li img {
+  width: 60%;
+}
+
+.image-list li > div {
+  text-align: left;
+  margin: 0px 0px 0px 20px;
+}
+
+.filters {
   margin-top: 8px;
   margin-bottom: -8px;
 }
 
-.datetime-filter input {
+.filters input {
   margin-left: 5px;
 }
 
-.datetime-filter label {
+.filters select {
+  margin-left: 5px;
+}
+
+.filters label {
   margin-left: 10px;
+}
+
+.btn-group {
+  height: 6%;
 }
 
 .btn-group button {
@@ -331,7 +367,8 @@ body, html {
   color: white; /* White text */
   cursor: pointer; /* Pointer/hand icon */
   float: left; /* Float the buttons side by side */
-  border-radius: 0 /* Make the button squared */
+  border-radius: 0; /* Make the button squared */
+  height: 100%; /* Make the button take full height */
 }
 
 /* Clear floats (clearfix hack) */

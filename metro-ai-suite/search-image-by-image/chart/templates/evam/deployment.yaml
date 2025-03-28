@@ -77,8 +77,8 @@ spec:
           - |
             cp /tmp/pipeline/config.json . &&
             cp /tmp/pipeline/person-vehicle-bike-detection-2004.json . &&
-            cp /tmp/pipeline/resnet-50-pytorch.json . &&
-            runuser -u eiiuser ./run.sh
+            chown 1999 -R /home/pipeline-server &&
+            runuser -u intelmicroserviceuser ./run.sh
         ports:
         - containerPort: 8080
           name: port-8080
@@ -86,9 +86,6 @@ spec:
         - name: '{{ include "search_image_by_image.fullname" . }}-evam-pipeline'
           mountPath: /tmp/pipeline
           subpath: config.json
-        - name: '{{ include "search_image_by_image.fullname" . }}-evam-udf'
-          mountPath: /home/pipeline-server/gvapython/mqtt_publisher
-          subpath: mqtt_publisher.py
         - name: '{{ include "search_image_by_image.fullname" . }}-evam-pipeline-root'
           mountPath: /var/cache/pipeline_root
         - name: '{{ include "search_image_by_image.fullname" . }}-evam-tmp'
@@ -103,9 +100,6 @@ spec:
       - name: '{{ include "search_image_by_image.fullname" . }}-evam-pipeline'
         configMap:
           name: '{{ include "search_image_by_image.fullname" . }}-evam-pipeline'
-      - name: '{{ include "search_image_by_image.fullname" . }}-evam-udf'
-        configMap:
-          name: '{{ include "search_image_by_image.fullname" . }}-evam-udf'
       - name: '{{ include "search_image_by_image.fullname" . }}-evam-pipeline-root'
         emptyDir:
           sizeLimit: 1Gi
