@@ -95,7 +95,7 @@ By following this guide, you will learn how to:
 1.  To stop the application, use the following commands:
 
     ```bash
-    docker compose down
+    docker compose down -v
     ```
 
 ## Next Steps
@@ -136,4 +136,4 @@ By following this guide, you will learn how to:
 
 ## Supporting Resources
 - [Docker Compose Documentation](https://docs.docker.com/compose/)
-- [Edge Video Analytics Microservice](https://docs.edgeplatform.intel.com/edge-video-analytics-microservice/2.3.0/user-guide/Overview.html)
+- [DL Streamer Pipeline Server](https://docs.edgeplatform.intel.com/edge-video-analytics-microservice/2.3.0/user-guide/Overview.html)
