@@ -12,6 +12,7 @@ Helm simplifies Kubernetes deployments by streamlining configurations and enabli
 
 Before You Begin, ensure the following:
 
+- **Kubernetes Cluster**: Ensure you have a properly installed and configured Kubernetes cluster.
 - **System Requirements**: Verify that your system meets the [minimum requirements](./system-requirements.md).
 - **Tools Installed**: Install the required tools:
     - Kubernetes CLI (kubectl)
