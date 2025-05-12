@@ -22,7 +22,7 @@ Before You Begin, ensure the following:
 
 To deploy the Smart Intersection Sample Application, copy and paste the entire block of commands below into your terminal and run them:
 
-  ```bash
+```bash
 # change the permissions of the secrets folder
 sudo chown -R $USER:$USER chart/files/secrets
 sudo chown -R $USER:$USER src/secrets
@@ -97,41 +97,52 @@ kubectl cp ./src/webserver/smart-intersection-ri.tar.bz2 smart-intersection/${PG
 kubectl -n smart-intersection exec $PGSERVER_POD -c init-smart-intersection-ri -- touch /data/.done
 
 sleep 5 # Wait for the init container to finish
+```
 
-# Access Application Services
-# ===========================
-#
-# Use kubectl port-forward to access the application services on <protocol>://localhost:<service-port>
-# For more available options, see https://kubernetes.io/docs/reference/kubectl/generated/kubectl_port-forward/#options
+## Access Application Services
 
-# Access the Application UI
-# =========================
+Use `kubectl port-forward` to access the application services on <protocol>://localhost:<service-port>
+For more available options, see [kubectl port-forward options](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_port-forward/#options)
+
+
+### Access the Application UI
+
+```bash
 WEB_POD=$(kubectl get pods -n smart-intersection -l app=smart-intersection-web -o jsonpath="{.items[0].metadata.name}")
 sudo -E kubectl -n smart-intersection port-forward $WEB_POD 443:443
+```
 
-# Access the Grafana UI
-# =====================
+### Access the Grafana UI
+
+```bash
 GRAFANA_POD=$(kubectl get pods -n smart-intersection -l app=smart-intersection-grafana -o jsonpath="{.items[0].metadata.name}")
 kubectl -n smart-intersection port-forward $GRAFANA_POD 3000:3000
+```
 
-# Access the InfluxDB UI
-# ======================
+### Access the InfluxDB UI
+
+```bash
 INFLUX_POD=$(kubectl get pods -n smart-intersection -l app=smart-intersection-influxdb -o jsonpath="{.items[0].metadata.name}")
 kubectl -n smart-intersection port-forward $INFLUX_POD 8086:8086
+```
 
-# Access the NodeRED UI
-# =====================
+### Access the NodeRED UI
+
+```bash
 NODE_RED_POD=$(kubectl get pods -n smart-intersection -l app=smart-intersection-nodered -o jsonpath="{.items[0].metadata.name}")
 kubectl -n smart-intersection port-forward $NODE_RED_POD 1880:1880
+```
 
-# Access the DL Streamer Pipeline Server
-# =======================
+### Access the DL Streamer Pipeline Server
+
+```bash
 DLS_PS_POD=$(kubectl get pods -n smart-intersection -l app=smart-intersection-dlstreamer-pipeline-server -o jsonpath="{.items[0].metadata.name}")
 kubectl -n smart-intersection port-forward $DLS_PS_POD 8080:8080
 kubectl -n smart-intersection port-forward $DLS_PS_POD 8555:8555
-  ```
+```
 
-### How to Delete the Namespace
+## How to Delete the Namespace
+
 To delete the namespace and all resources within it, run the following command:
 
 ```bash
