@@ -72,7 +72,7 @@ This page provides comprehensive support and troubleshooting information for the
     docker compose logs scene
     ```
   - When the scene controller can't connect to the broker, the following log lines are shown:
-    ```txt
+    ```
     Starting scene controller
     Broker broker.scenescape.intel.com online: [Errno 111] Connection refused
     Broker broker.scenescape.intel.com online: [Errno 111] Connection refused
@@ -84,7 +84,7 @@ This page provides comprehensive support and troubleshooting information for the
     docker compose up -d scene
     ```
   - Then verify that the container is ready:
-    ```txt
+    ```
     Broker broker.scenescape.intel.com online: Connecting
     Broker broker.scenescape.intel.com online: 0
     Took 1 seconds
