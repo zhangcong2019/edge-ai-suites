@@ -19,12 +19,12 @@ create_dir() {
 }
 
 ##############################################################################
-# 0. Check for python3.12-venv (only place we use sudo)
+# 0. Check for python3-venv (only place we use sudo)
 ##############################################################################
 if ! dpkg -s python3.12-venv &>/dev/null; then
     echo "Package python3.12-venv not installed. Attempting to install..."
     sudo apt update
-    sudo apt install -y python3.12-venv
+    sudo apt install -y python3-venv
 fi
 
 ##############################################################################
