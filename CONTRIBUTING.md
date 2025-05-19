@@ -34,7 +34,7 @@ Clone the repository and follow the [`README`](README.md) to get started with th
 
 ## Contribute Code Changes
 
-> If you want to help improve Edge AI Suites, choose one of the issues reported in [`GitHub Issues`](issues) and create a [`Pull Request`](pulls) to address it.  
+> If you want to help improve Edge AI Suites, choose one of the issues reported in [`GitHub Issues`](https://github.com/open-edge-platform/edge-ai-suites/issues) and create a [`Pull Request`](https://github.com/open-edge-platform/edge-ai-suites/pulls) to address it.  
 > Note: Please check that the change hasn't been implemented before you start working on it.
 
 ## Improve Documentation
@@ -45,7 +45,7 @@ information should be added, you can reach out to discuss the potential changes.
 
 ## Report Bugs
 
-If you encounter a bug, open an issue in [`Github Issues`](issues). Provide the following information to help us 
+If you encounter a bug, open an issue in [`Github Issues`](https://github.com/open-edge-platform/edge-ai-suites/issues). Provide the following information to help us 
 understand and resolve the issue quickly:
 
 - A clear and descriptive title
@@ -59,7 +59,7 @@ understand and resolve the issue quickly:
 
 Intel welcomes suggestions for new features and improvements. Follow these steps to make a suggestion:
 
-- Check if there's already a similar suggestion in [`Github Issues`](issues).  
+- Check if there's already a similar suggestion in [`Github Issues`](https://github.com/open-edge-platform/edge-ai-suites/issues).  
 - If not, open a new issue and provide the following information:
    - A clear and descriptive title
    - A detailed description of the enhancement
@@ -95,29 +95,8 @@ Clear and informative commit messages make it easier to understand the history o
 - Capitalize the first letter
 - Keep the message concise, ideally under 50 characters
 
-Use the following format for pull requests descriptions:
-
-```
-### Description
-
-Please include a summary of the changes and the related issue. List any dependencies that are required for this change.
-
-Fixes # (issue)
-
-### Any Newly Introduced Dependencies
-
-Please describe any newly introduced 3rd party dependencies in this change. List their name, license information and how they are used in the project.
-
-### How Has This Been Tested?
-
-Please describe the tests that you ran to verify your changes. Provide instructions so we can reproduce. Please also list any relevant details for your test configuration
-
-### Checklist:
-
-- [ ] I agree to use the APACHE-2.0 license for my code changes
-- [ ] I have not introduced any 3rd party dependency changes
-- [ ] I have performed a self-review of my code
-```
+Please fill in the details as per the [pull request template](./.github/PULL_REQUEST_TEMPLATE.md) while submitting the 
+pull request.
 
 ## Testing
 
