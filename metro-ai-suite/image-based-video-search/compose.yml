@@ -149,7 +149,8 @@ services:
       - MQTT_HOST=ibvs-broker
       - MQTT_PORT=1883
     volumes:
-      - "./src/dlstreamer-pipeline-server/configs/filter-pipeline/config.json:/home/pipeline-server/config.json"
+      - "./src/dlstreamer-pipeline-server/configs/filter-pipeline/config.cpu.json:/home/pipeline-server/config.json"
+      # - "./src/dlstreamer-pipeline-server/configs/filter-pipeline/config.gpu.json:/home/pipeline-server/config.json"
       - "dlstreamer-pipeline-server-pipeline-root:/var/cache/pipeline_root:uid=1999,gid=1999"
       # - "../certificates:/MqttCerts:ro"
       # - "../Certificates/ssl_server/:/run/secrets/EdgeVideoAnalyticsMicroservice_Server:ro"
