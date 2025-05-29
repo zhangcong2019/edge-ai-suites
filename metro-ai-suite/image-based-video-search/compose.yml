@@ -66,19 +66,6 @@ services:
       context: src/streaming-pipeline
       dockerfile: Dockerfile
     container_name: ibvs-streaming
-    ports:
-      - "9999:9999"
-    environment:
-      DISPLAY: ":0"
-      WAYLAND_DISPLAY: "wayland-0"
-      XDG_RUNTIME_DIR: "/mnt/wslg/runtime-dir"
-      PULSE_SERVER: "/mnt/wslg/PulseServer"
-      GST_DEBUG: "1"
-    devices:
-      - "/dev/dri:/dev/dri"
-    volumes:
-      - "/run/desktop/mnt/host/wslg/.X11-unix:/tmp/.X11-unix"
-      - "/run/desktop/mnt/host/wslg:/mnt/wslg"
     command: >
       bash -c "
         wget -O file.mp4 https://github.com/intel-iot-devkit/sample-videos/raw/master/person-bicycle-car-detection.mp4 && \
