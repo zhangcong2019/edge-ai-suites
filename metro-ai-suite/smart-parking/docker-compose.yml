@@ -22,6 +22,7 @@ services:
     environment:
       - ENABLE_WEBRTC=true
       - no_proxy=${no_proxy},${HOST_IP}
+      - NO_PROXY=${no_proxy},${HOST_IP}
       - WEBRTC_SIGNALING_SERVER=http://${HOST_IP}:8889
       - http_proxy=${http_proxy}
       - APPEND_PIPELINE_NAME_TO_PUBLISHER_TOPIC=true
