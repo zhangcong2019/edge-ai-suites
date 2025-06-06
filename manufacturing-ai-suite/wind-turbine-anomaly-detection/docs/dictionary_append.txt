@@ -22,7 +22,7 @@ Chronograf
 InfluxDB
 MinIO
 golang
-defind
+defined
 codebase
 py
 udf
@@ -44,14 +44,14 @@ dev
 bootable
 checkboxes
 Integrators
-Visualzer
+Visualizer
 usecase
 time-series
 grafana
 visualizating
 windturbine
 Regressor
-Anamoly
+Anomaly
 creds
 Windspeed
 kubernetes

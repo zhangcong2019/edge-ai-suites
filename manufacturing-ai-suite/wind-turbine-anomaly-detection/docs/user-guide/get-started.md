@@ -64,9 +64,10 @@ This data is being ingested into **Telegraf** using the **OPC-UA** protocol usin
 ### **Data Processing**
 
 **Time Series Analytics Microservice** uses the User Defined Function(UDF) deployment package(TICK Scripts, UDFs, Models) which is already built-in to the container image. The UDF deployment package is available
-at `<path-to-edge-ai-suites-repo>/manufacturing-ai-suite/wind-turbine-anomaly-detection/time-series-analytics-microservice`. Directory details is as below:
+at `<path-to-edge-ai-suites-repo>/manufacturing-ai-suite/wind-turbine-anomaly-detection/time_series_analytics_microservice`. Directory details is as below:
   
 #### **`config.json`**:
+
 The `task` section defines the settings for the Kapacitor task and User-Defined Functions (UDFs).
 
 | Key                     | Description                                                                                     | Example Value                          |
@@ -91,7 +92,8 @@ The `udfs` section specifies the details of the UDFs used in the task.
 
 **Alerts Configuration**:
 
-The `alerts` section defines the settings for alerting mechanisms, such as MQTT.
+The `alerts` section defines the settings for alerting mechanisms, such as MQTT protocol.
+For OPC-UA configuration, please refer [Publishing OPC-UA alerts](./how-to-configure-alerts.md#publishing-opc-ua-alerts)
 
 **MQTT Configuration**:
 
@@ -105,21 +107,21 @@ The `mqtt` section specifies the MQTT broker details for sending alerts.
 
 
 #### **`config/`**:
-  - `kapacitor_devmode.conf` would be updated as per the above `config.json` at runtime for usage.
+   - `kapacitor_devmode.conf` would be updated as per the above `config.json` at runtime for usage.
 
 #### **`udfs/`**:
-  - Contains the python script to process the incoming data.
-    Uses Random Forest Regressor and Linear Regression machine learning algos accelerated with Intel® Extension for Scikit-learn*
-    to run on CPU to detect the anomalous power generation data points relative to wind speed.
+   - Contains the python script to process the incoming data.
+     Uses Random Forest Regressor and Linear Regression machine learning algos accelerated with Intel® Extension for Scikit-learn*
+     to run on CPU to detect the anomalous power generation data points relative to wind speed.
 
 #### **`tick_scripts/`**:
-  - The TICKScript `windturbine_anomaly_detector.tick` determines processing of the input data coming in.
-    Mainly, has the details on execution of the UDF file, storage of processed data and publishing of alerts. 
-    By default, it is configured to publish the alerts to **MQTT**.
+   - The TICKScript `windturbine_anomaly_detector.tick` determines processing of the input data coming in.
+     Mainly, has the details on execution of the UDF file, storage of processed data and publishing of alerts. 
+     By default, it is configured to publish the alerts to **MQTT**.
    
 #### **`models/`**:
-  - The `windturbine_anomaly_detector.pkl` is a model built using the RandomForestRegressor Algo.
-    More details on how it is built is accessible at `<path-to-edge-ai-suites-repo>/manufacturing-ai-suite/wind-turbine-anomaly-detection/training/windturbine/README.md`
+   - The `windturbine_anomaly_detector.pkl` is a model built using the RandomForestRegressor Algo.
+     More details on how it is built is accessible at `<path-to-edge-ai-suites-repo>/manufacturing-ai-suite/wind-turbine-anomaly-detection/training/windturbine/README.md`
 
 ## Clone source code
 
@@ -133,11 +135,11 @@ git clone https://github.com/open-edge-platform/edge-ai-suites
 Navigate to the application directory and build the Docker images:
 
 > **NOTE**:
-> As a pre-requisite, please build the following microservices independently:
-> - Time Series Analytics microservice by referring the docs at <https://github.com/open-edge-platform/edge-ai-libraries/blob/main/microservices/time-series-analytics/docs/user-guide/get-started.md#build-docker-image> 
+> As a pre-requisite, please build `Time Series Analytics` microservice by referring the docs at <https://github.com/open-edge-platform/edge-ai-libraries/blob/main/microservices/time-series-analytics/docs/user-guide/get-started.md#build-docker-image> or use the pre-built
+docker image from the docker hub or internal container registry
 
 ```bash
-make build # builds only data simulator (OPC-UA serer and MQTT publisher) docker images
+make build # builds only data simulator (OPC-UA server and MQTT publisher) docker images
 ```
 
 ## Deploy with Docker Compose (Single Node)
@@ -191,9 +193,6 @@ make status
     ``` bash
     # For below command, the INFLUXDB_USERNAME and INFLUXDB_PASSWORD needs to be fetched from `.env` file
     # for docker compose deployment and `values.yml` for helm deployment
-    # Use the below command while working in secure mode
-    influx -ssl -unsafeSsl -username <username> -password <passwd>
-    # Use the below command while working in insecure mode
     influx -username <username> -password <passwd> 
     use datain # database access
     show measurements
@@ -238,6 +237,26 @@ make status
   docker logs -f <container_name>
   docker logs -f <container_name> | grep -i error
   ```
+
+## Advanced guide
+
+### Alerts configuration in Time Series Analytics microservice
+
+Please refer [link](how-to-configure-alerts.md), the config.json changes would be auto-picked in the docker compose deployment but for helm deployment, please
+regenerate the helm charts and install by following steps mentioned at [link](how-to-deploy-with-helm.md)
+
+### Using Custom UDF deployment package in Time Series Analytics microservice
+  
+Please refer [link](how-to-configure-custom-udf.md), the config.json changes would be auto-picked in the docker compose deployment but for helm deployment, please
+regenerate the helm charts and install by following steps mentioned at [link](how-to-deploy-with-helm.md)
+
+### Enabling system metrics for docker compose deployment
+
+Please refer [link](how-to-enable-system-metrics.md).
+
+### Deploying the helm charts on Edge orchestrator
+
+Please refer [link](how-to-deploy-with-edge-orchestrator.md). Please note if any of the default configuration is changed in `<path-to-edge-ai-suites-repo>/manufacturing-ai-suite/wind-turbine-anomaly-detection/time_series_analytics_microservice/config.json`, please ensure to re-upload the different set of helm charts to the container registry, point to that in the deployment package and re-deploy.
 
 ## Supporting Resources
 

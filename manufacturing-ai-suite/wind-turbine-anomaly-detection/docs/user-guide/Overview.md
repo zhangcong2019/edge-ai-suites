@@ -80,4 +80,4 @@ The Time Series Analytics microservice allows customization by reading the UDF d
 
 ## Summary
 
-This guide demonstrated how the overview and architecture of the Wind Turbine Anomaly Detection sample app. For more details to get started, refer to [Getting Started](./get-started.md).
+This guide provides an overview of the architecture for the Wind Turbine Anomaly Detection sample app. For detailed instructions on getting started, refer to Getting Started

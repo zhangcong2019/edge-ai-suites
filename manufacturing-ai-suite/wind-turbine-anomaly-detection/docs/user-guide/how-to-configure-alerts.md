@@ -2,56 +2,26 @@
 
 This guide provides instructions for setting up alerts in **Time Series Analytics Microservice**.
 
-## Publishing OPC-UA Alerts
-
-To enable OPC-UA alerts in `Time Series Analytics Microservice`, please follow below steps.
-The way to verify if the OPC-UA alerts are getting published would be check the `Time Series Analytics Microservice` logs OR
-have any third-party OPC-UA client to connect to OPC-UA server to verify this.
-
-1. Update the `config.json` file:
-   ```json
-   "alerts": {
-       "opcua": {
-           "opcua_server": "opc.tcp://ia-opcua-server:4840/freeopcua/server/",
-           "namespace": 1,
-           "node_id": 2004
-       }
-   }
-   ```
-### Configuring OPC-UA Alert in TICK Script
-
-```bash
-data0
-    |alert()
-        .crit(lambda: "anomaly_status" > 0)
-        .message('Anomaly detected: Wind Speed: {{ index .Fields "wind_speed" }}, Grid Active Power: {{ index .Fields "grid_active_power" }}, Anomaly Status: {{ index .Fields "anomaly_status" }}')
-        .noRecoveries()
-        .post('http://localhost:5000/opcua_alerts')
-        .timeout(30s)
-```
-
-> **Note**:
-> - The `noRecoveries()` method suppresses recovery alerts, ensuring only critical alerts are sent.
-
 ## Publishing MQTT Alerts
 
-### MQTT Configuration in Time Series Analytics Microservice
+### Configurating MQTT Alerts
 
-To enable MQTT alerts, add the following configuration to `kapacitor_devmode.conf`:
+By default, the below MQTT alerts is configured in `<path-to-edge-ai-suites-repo>/manufacturing-ai-suite/wind-turbine-anomaly-detection/time_series_analytics_microservice/config.json` file.
 
-```bash
-[[mqtt]]
-  enabled = true
-  name = "my_mqtt_broker"
-  default = true
-  url = "tcp://ia-mqtt-broker:1883"
-  username = ""
-  password = ""
-```
-
-> **Note**: For external MQTT brokers with TLS, mount the required certificates to `/run/secrets/mqtt_certs` and update the `ssl-ca`, `ssl-cert`, and `ssl-key` paths in the configuration.
+  ```json
+    "alerts": {
+        "mqtt": {
+            "mqtt_broker_host": "ia-mqtt-broker",
+            "mqtt_broker_port": 1883,
+            "name": "my_mqtt_broker"
+        }
+     }
+   ```
 
 ### Configuring MQTT Alert in TICK Script
+
+The details below shows the snippet on how to add the MQTT if not 
+already added. By default, the `<path-to-edge-ai-suites-repo>/manufacturing-ai-suite/wind-turbine-anomaly-detection/time_series_analytics_microservice/tick_scripts/windturbine_anomaly_detector.tick` TICK Script has the below configuration done by default.
 
 ```bash
 @windturbine_anomaly_detector()
@@ -67,7 +37,7 @@ To enable MQTT alerts, add the following configuration to `kapacitor_devmode.con
 
 ### Subscribing to MQTT Alerts
 
-To subscribe to MQTT alerts:
+To subscribe to the published MQTT alerts:
 
 #### Docker compose deployment
 
@@ -87,7 +57,7 @@ docker exec -ti ia-mqtt-broker mosquitto_sub -h localhost -v -t alerts/wind_turb
 
 To subscribe to MQTT topics in a Helm deployment, execute the following command:
 
-Identify the the MQTT broker pod name by running:
+Identify the MQTT broker pod name by running:
 ```sh
 kubectl get pods -n apps | grep mqtt-broker
 ```
@@ -103,8 +73,42 @@ To subscribe to the `alerts/wind_turbine` topic, use the following command:
 kubectl exec -it -n apps <mqtt_broker_pod_name> -- mosquitto_sub -h localhost -v -t alerts/wind_turbine -p 1883
 ```
 
-> **Note:**
-> If you are deploying with the Edge Orchestrator, make sure to export the `KUBECONFIG` environment variable.
+## Publishing OPC-UA Alerts
+
+To enable OPC-UA alerts in `Time Series Analytics Microservice`, please follow below steps.
+The way to verify if the OPC-UA alerts are getting published would be to check the `Time Series Analytics Microservice` logs OR
+have any third-party OPC-UA client to connect to OPC-UA server to verify this.
+
+### Configuration
+
+Update the `<path-to-edge-ai-suites-repo>/manufacturing-ai-suite/wind-turbine-anomaly-detection/time_series_analytics_microservice/config.json` file:
+   ```json
+   "alerts": {
+       "opcua": {
+           "opcua_server": "opc.tcp://ia-opcua-server:4840/freeopcua/server/",
+           "namespace": 1,
+           "node_id": 2004
+       }
+   }
+   ```
+### Configuring OPC-UA Alert in TICK Script
+
+The details below shows the snippet on how to add the OPC-UA alert if not 
+already added, please replace this in place of MQTT alert section at
+`<path-to-edge-ai-suites-repo>/manufacturing-ai-suite/wind-turbine-anomaly-detection/time_series_analytics_microservice/tick_scripts/windturbine_anomaly_detector.tick`.
+
+```bash
+data0
+    |alert()
+        .crit(lambda: "anomaly_status" > 0)
+        .message('Anomaly detected: Wind Speed: {{ index .Fields "wind_speed" }}, Grid Active Power: {{ index .Fields "grid_active_power" }}, Anomaly Status: {{ index .Fields "anomaly_status" }}')
+        .noRecoveries()
+        .post('http://localhost:5000/opcua_alerts')
+        .timeout(30s)
+```
+
+> **Note**:
+> - The `noRecoveries()` method suppresses recovery alerts, ensuring only critical alerts are sent.
 
 
 ## Supporting Resources

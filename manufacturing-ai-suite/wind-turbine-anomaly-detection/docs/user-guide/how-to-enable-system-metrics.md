@@ -1,12 +1,12 @@
 # How to enable System Metrics Dashboard
 
-To enable the system metrics dashboard for validation, run the following command:
+> **Note**: The system metrics dashboard is only supported with docker compose deployments and requires `Telegraf` to run as the `root` user.
+
+To enable the system metrics dashboard showcasing the host and docker containers CPU, memory, network, disk IO usage, run the following command:
 
 ```bash
 make up_opcua_ingestion INCLUDE=validation
 ```
-
-> **Note**: The system metrics dashboard is only supported with Docker Compose deployments and requires `Telegraf` to run as the `root` user.
 
 ##  Viewing System Metrics Dashboard
 
