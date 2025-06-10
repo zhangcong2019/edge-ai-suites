@@ -30,21 +30,52 @@ jobs:
             docker rm $(docker ps -aq)
         fi
         docker images --quiet --filter=dangling=true | xargs --no-run-if-empty docker rmi -f
-    - uses: actions/checkout@v1
+    - name: Checkout edge-ai-libraries (main)
+      uses: actions/checkout@v4
+      with:
+        repository: open-edge-platform/edge-ai-libraries
+        ref: main
+        path: edge-ai-libraries
+    - name: Building Time Series Analytics microservices
+      run: |
+        cd ./edge-ai-libraries/microservices/time-series-analytics/docker
+        docker compose down -v 
+        docker compose build
+    - uses: actions/checkout@v4
       with:
           path: timeseries
-    - name: Build
+    - name: Building Wind Turbine Anomaly Detection Sample App
       run: |
-        cd ./manufacturing-ai-suite/wind-turbine-anomaly-detection
+        cd ./timeseries/manufacturing-ai-suite/wind-turbine-anomaly-detection
+        make down 
+        # Generate random values for sensitive environment variables
+        INFLUXDB_USERNAME=$(openssl rand -hex 8)
+        INFLUXDB_PASSWORD=$(openssl rand -hex 12)
+        VISUALIZER_GRAFANA_USER=$(openssl rand -hex 6)
+        VISUALIZER_GRAFANA_PASSWORD=$(openssl rand -hex 10)
+        MR_PSQL_PASSWORD=$(openssl rand -hex 10)
+        MR_MINIO_ACCESS_KEY=$(openssl rand -hex 8)
+        MR_MINIO_SECRET_KEY=$(openssl rand -hex 16)
+
+        sed -i "s/INFLUXDB_USERNAME=.*/INFLUXDB_USERNAME=${INFLUXDB_USERNAME}/g" .env
+        sed -i "s/INFLUXDB_PASSWORD=.*/INFLUXDB_PASSWORD=${INFLUXDB_PASSWORD}/g" .env
+        sed -i "s/VISUALIZER_GRAFANA_USER=.*/VISUALIZER_GRAFANA_USER=${VISUALIZER_GRAFANA_USER}/g" .env
+        sed -i "s/VISUALIZER_GRAFANA_PASSWORD=.*/VISUALIZER_GRAFANA_PASSWORD=${VISUALIZER_GRAFANA_PASSWORD}/g" .env
+        sed -i "s/MR_PSQL_PASSWORD=.*/MR_PSQL_PASSWORD=${MR_PSQL_PASSWORD}/g" .env
+        sed -i "s/MR_MINIO_ACCESS_KEY=.*/MR_MINIO_ACCESS_KEY=${MR_MINIO_ACCESS_KEY}/g" .env
+        sed -i "s/MR_MINIO_SECRET_KEY=.*/MR_MINIO_SECRET_KEY=${MR_MINIO_SECRET_KEY}/g" .env 
         make build
-    - name: Deploy
+    - name: Deploying Wind Turbine Anomaly Detection Sample App
       run: |
         cd "${{ github.workspace }}"
-        cd ./manufacturing-ai-suite/wind-turbine-anomaly-detection
+        cd ./timeseries/manufacturing-ai-suite/wind-turbine-anomaly-detection
         echo "Deploying Wind Turbine Anomaly Detection Sample App"
-        
-    - name: Undeploy
+        echo "Deploying using mqtt ingestion"
+        make up_mqtt_ingestion
+        echo "Deploying using opcua ingestion"
+        make up_opcua_ingestion
+    - name: Undeploying Wind Turbine Anomaly Detection Sample App
       run: |
         cd "${{ github.workspace }}"
-        cd ./manufacturing-ai-suite/wind-turbine-anomaly-detection
+        cd ./timeseries/manufacturing-ai-suite/wind-turbine-anomaly-detection
         make down
