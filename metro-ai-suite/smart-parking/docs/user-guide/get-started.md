@@ -152,6 +152,10 @@ By following this guide, you will learn how to:
       systemctl restart docker
       ```
 
+5. **Not all streams are visible on Grafana**
+
+    - MediaMTX may fail to stream if the pipeline initialization (of any of the webrtc streaming pipeline) takes longer than 10 seconds. This would be evident from the "deadline exceeded" log in "mediamtx-server" docker container. To resolve this, you can increase the MTX_WEBRTCTRACKGATHERTIMEOUT value in the "environment" section of the docker-compose.yml file.
+
 ## Supporting Resources
 - [Docker Compose Documentation](https://docs.docker.com/compose/)
 - [DL Streamer Pipeline Server](https://docs.edgeplatform.intel.com/dlstreamer-pipeline-server/3.0.0/user-guide/Overview.html)

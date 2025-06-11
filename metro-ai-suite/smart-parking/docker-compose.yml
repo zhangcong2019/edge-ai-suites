@@ -68,6 +68,7 @@ services:
       - MTX_WEBRTCICESERVERS2_0_URL=turn:${HOST_IP}:3478
       - MTX_WEBRTCICESERVERS2_0_USERNAME=myusername
       - MTX_WEBRTCICESERVERS2_0_PASSWORD=mypassword
+      - MTX_WEBRTCTRACKGATHERTIMEOUT=10s
     ports:
       - "8889:8889"
       - "8189:8189"
