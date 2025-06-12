@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-FROM python:3.13.2-slim
+FROM python:3.13.4-slim
 
 COPY mqtt-publisher/requirements.txt /
 RUN pip3 install --no-cache-dir -r requirements.txt
