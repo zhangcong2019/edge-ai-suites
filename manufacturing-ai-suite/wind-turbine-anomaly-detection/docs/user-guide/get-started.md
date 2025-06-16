@@ -93,7 +93,8 @@ The `udfs` section specifies the details of the UDFs used in the task.
 **Alerts Configuration**:
 
 The `alerts` section defines the settings for alerting mechanisms, such as MQTT protocol.
-For OPC-UA configuration, please refer [Publishing OPC-UA alerts](./how-to-configure-alerts.md#publishing-opc-ua-alerts)
+For OPC-UA configuration, please refer [Publishing OPC-UA alerts](./how-to-configure-alerts.md#publishing-opc-ua-alerts).
+Please note to enable only one of the MQTT or OPC-UA alerts.
 
 **MQTT Configuration**:
 
@@ -171,7 +172,9 @@ make status
 
 1. Get into the InfluxDB* container:
 
-   > **Note**: Use `kubectl exec -it <influxdb-pod-name> -- /bin/bash` for the helm deployment
+   > **Note**: Use `kubectl exec -it <influxdb-pod-name> -n <namespace> -- /bin/bash` for the helm deployment
+   > where for <namespace> replace with namespace name where the application was deployed and
+   > for <influxdb-pod-name> replace with InfluxDB pod name.
 
    ``` bash
     docker exec -it ia-influxdb bash

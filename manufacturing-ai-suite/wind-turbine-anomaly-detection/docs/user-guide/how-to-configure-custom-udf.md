@@ -123,7 +123,7 @@ Follow the below steps:
 1. Configure `edge-ai-suites/manufacturing-ai-suite/wind-turbine-anomaly-detection/time_series_analytics_microservice/config.json` as per [above steps](#docker-compose-deployment)
 2. Run below command to generate the helm charts
    ```bash
-   cd edge-ai-suites/manufacturing-ai-suite/wind-turbine-anomaly-detection> # path relative to git clone folder
+   cd edge-ai-suites/manufacturing-ai-suite/wind-turbine-anomaly-detection # path relative to git clone folder
    make gen_helm_charts
    ```
 3. Follow helm configuration and deployment steps at [link](./how-to-deploy-with-helm.md)
