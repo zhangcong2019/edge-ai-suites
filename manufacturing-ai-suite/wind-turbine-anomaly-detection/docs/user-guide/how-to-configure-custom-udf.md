@@ -56,14 +56,16 @@ This guide provides instructions for setting up custom UDF deployment package (U
 
 ## With Volume Mounts
 
-### Docker compose deployment
+> **Note**: Follow the [getting started](./get-started.md) to have the Wind Turbine Anomaly Detection sample app deployed
+
+### Docker compose deployment Only
 
 The files at `edge-ai-suites/manufacturing-ai-suite/wind-turbine-anomaly-detection/time_series_analytics_microservice` representing the UDF deployment package (UDFs, TICKscripts, models)
-and config.json has been volume mounted at `edge-ai-suites/manufacturing-ai-suite/wind-turbine-anomaly-detection/docker-compose.yml`. If anything needs to be updated in the custom UDF deployment package and config.json, it has to be done at this location and the time series analytics microservice container needs to be restarted.
+and config.json has been volume mounted for the Time Series Analytics Microservice service in `edge-ai-suites/manufacturing-ai-suite/wind-turbine-anomaly-detection/docker-compose.yml`. If anything needs to be updated in the custom UDF deployment package and config.json, it has to be done at this location and the time series analytics microservice container needs to be restarted manually.
 
 ## With Model Registry
 
-### Uploading Models to the Model Registry
+### 1. Uploading Models to the Model Registry
 
 Below steps show how to create and upload the wind turbine anomaly detection UDF deployment package
 to the Model Registry microservice.
@@ -84,9 +86,9 @@ to the Model Registry microservice.
    -F 'file=@<udf_deployment_package_path.zip>;type=application/zip'
     ```
 
-### UDF Deployment Package structure
+### 2. UDF Deployment Package structure
 
-If one wants to create a separate deployment package, just ensure to have the following structure
+If one wants to create a separate UDF deployment package, just ensure to have the following structure
 before zipping and uploading it to Model Registry.
 
 > **NOTE**: Please ensure to have the same name for udf python script, TICK script and model name.
@@ -102,28 +104,16 @@ models/
 ```
 
 
-### Updating Time Series Analytics Microservice `config.json` for Model Registry usage
+### 3. Updating Time Series Analytics Microservice config for Model Registry usage
 
-#### Docker compose deployment
+> **Note**:
+> 1. If doing docker based deployment, ensure the Wind Turbine Anomaly Detection sample app is deployed by following [getting started](./get-started.md)
+> 2. If doing Helm based deployment on Kubernetes cluster, ensure the Wind Turbine Anomaly Detection sample app is deployed by following [how to deploy with helm](./how-to-deploy-with-helm.md)
 
-To fetch UDFs and models from the Model Registry, update the configuration file at:
-`edge-ai-suites/manufacturing-ai-suite/wind-turbine-anomaly-detection/time_series_analytics_microservice/config.json`.
+To fetch UDFs and models from the Model Registry, one can dynamically update the configuration of Time Series Analytics microservice using [steps](./how-to-update-config.md#how-to-update-config-in-time-series-analytics-microservice) and set the below parameters.
 
-1. Set `fetch_from_model_registry` to `true`.
-2. Specify the `task_name` and `version` as defined in the Model Registry.
+1. Set ``model_registry` key `enable` to `true`.
+2. Specify the `udf_name` and `version` as defined in the Model Registry.
    
    > **Note**: Mismatched task names or versions will cause the microservice to restart.
-4. Update the `tick_script` and `udfs` sections with the appropriate `name` and `models` details.
-
-As we are watching on `config.json` changes, the `ia-time-series-analytics-microservice` would auto-restart.
-
-#### Helm deployment
-
-Follow the below steps:
-1. Configure `edge-ai-suites/manufacturing-ai-suite/wind-turbine-anomaly-detection/time_series_analytics_microservice/config.json` as per [above steps](#docker-compose-deployment)
-2. Run below command to generate the helm charts
-   ```bash
-   cd edge-ai-suites/manufacturing-ai-suite/wind-turbine-anomaly-detection # path relative to git clone folder
-   make gen_helm_charts
-   ```
-3. Follow helm configuration and deployment steps at [link](./how-to-deploy-with-helm.md)
+3. Update `udfs` sections with the appropriate `name` and `models` details.

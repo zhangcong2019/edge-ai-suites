@@ -23,13 +23,13 @@ env:
   # The VISUALIZER_GRAFANA_USER and VISUALIZER_GRAFANA_PASSWORD length must be a minimum of 5 and 10 characters respectively 
   # and should contain alphanumeric characters with atleast one digit
   VISUALIZER_GRAFANA_USER: 
-  VISUALIZER_GRAFANA_PASSWORD:
+  VISUALIZER_GRAFANA_PASSWORD: 
   # The POSTGRES_USER length must be a minimum of 5 and 10 characters respectively
-  POSTGRES_PASSWORD:
+  POSTGRES_PASSWORD: 
   # MinIO Secret Key length must be a minimum of 8 and 16 characters respectively and should contain alphanumeric characters with at least one digit 
-  MINIO_SECRET_KEY:
+  MINIO_SECRET_KEY: 
   HTTP_PROXY: 
-  HTTPS_PROXY:
+  HTTPS_PROXY: 
   # SECURE_MODE environment variable should not be changed as it may cause unexpected behavior or system failure.
   SECURE_MODE: false 
   TELEGRAF_INPUT_PLUGIN: opcua
@@ -87,6 +87,13 @@ config:
   time_series_analytics_microservice:
     name: time-series-analytics-microservice
     kapacitor_port: 9092
+  time_series_analytics_microservice_rest_api:
+    name: time-series-analytics-microservice-rest-api
+    rest_api_port: 5000
+    int:
+      port: "5000"
+    ext:
+      port: "30002"
   mqttbroker:
     name: ia-mqtt-broker
     int:
