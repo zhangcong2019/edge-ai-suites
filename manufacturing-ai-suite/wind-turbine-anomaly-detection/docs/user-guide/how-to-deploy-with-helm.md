@@ -110,7 +110,13 @@ You need to copy your own or existing model into Time Series Analytics Microserv
 
 ## Activate the new UDF deployment package
 
-Refer the [steps](./how-to-update-config.md#to-activate-the-new-udf-deployment-package) to start the UDF deployment with the copied UDF deployment package.
+Run the below command to activate the UDF deployment package.
+
+```bash
+curl -X 'GET' \
+  'http://<HOST_IP>:30002/config?restart=true' \
+  -H 'accept: application/json'
+``
 
 ## Verify the wind turbine anomaly detection results
 
