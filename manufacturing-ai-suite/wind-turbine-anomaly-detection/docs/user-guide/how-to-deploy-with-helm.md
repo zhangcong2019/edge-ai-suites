@@ -116,7 +116,7 @@ Run the below command to activate the UDF deployment package.
 curl -X 'GET' \
   'http://<HOST_IP>:30002/config?restart=true' \
   -H 'accept: application/json'
-``
+```
 
 ## Verify the wind turbine anomaly detection results
 
