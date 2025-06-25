@@ -209,6 +209,8 @@ services:
       interval: 5m
     networks:
     - timeseries_network
+    ports:
+    - ${OPCUA_SERVER_PORT}:4840
     volumes:
     - ./simulator/simulation_data/windturbine_data.csv:/app/windturbine_data.csv
 
