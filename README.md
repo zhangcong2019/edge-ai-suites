@@ -17,7 +17,7 @@ These suites simplify the creation of custom AI solutions for specific industrie
 
 [The Retail AI Suite](retail-ai-suite) accelerates hardware decisions for Retail AI workloads at the edge, featuring use cases such as self-checkout and loss prevention.
 
-[The Media & Entertainment AI Suite](media-and-entertainment-ai-suite) provides libraries and sample applications to accelerate solution development for high-performance, high-quality, live video production helping improve viewer experience.
+[The Media & Entertainment AI Suite](media-and-entertainment-ai-suite) provides libraries and sample applications to accelerate solution development for high-performance, high-quality, and live video production, which improves viewer experience.
 
 
 The Edge AI Suites project hosts a collection of sample applications organized as follows:
@@ -38,7 +38,7 @@ The Edge AI Suites project hosts a collection of sample applications organized a
 | Retail AI Suite | [Automated Self Checkout](https://github.com/intel-retail/automated-self-checkout) | [Link](https://github.com/intel-retail/automated-self-checkout?tab=readme-ov-file#-quickstart) | [Advanced Guide](https://intel-retail.github.io/documentation/use-cases/automated-self-checkout/automated-self-checkout.html) |
 | Retail AI Suite | [Loss Prevention](https://github.com/intel-retail/loss-prevention) | [Link](https://github.com/intel-retail/loss-prevention?tab=readme-ov-file#quickstart) | [Advanced Guide](https://intel-retail.github.io/documentation/use-cases/loss-prevention/loss-prevention.html) |
 
-Please visit each sample application sub-directory for respective **Getting Started**, **Customization** instructions.
+Visit each sample application sub-directory for the respective **Getting Started** and **Customization** instructions.
 
 ## Contribute
 
@@ -46,7 +46,7 @@ To learn how to contribute to the project, see [CONTRIBUTING.md](CONTRIBUTING.md
 
 ## Community and Support
 
-For support, please submit your bug report and feature request to [Github Issues](https://github.com/open-edge-platform/edge-ai-suites/issues). 
+For support, submit your bug report and feature request to [Github Issues](https://github.com/open-edge-platform/edge-ai-suites/issues). 
 
 ## License
 
@@ -57,5 +57,5 @@ The **Edge AI Suites** project is licensed under the [APACHE 2.0](LICENSE), exce
 |[Smart Intersection](metro-ai-suite/smart-intersection) | [LIMITED EDGE SOFTWARE DISTRIBUTION LICENSE AGREEMENT](metro-ai-suite/smart-intersection/LICENSE.txt) |
 |[Holographic Sensor Fusion](metro-ai-suite/holographic-sensor-fusion) | [LIMITED EDGE SOFTWARE DISTRIBUTION LICENSE AGREEMENT](metro-ai-suite/holographic-sensor-fusion/LICENSE.txt) |
 
-Last Updated Date: May 30, 2025.  
+Last Updated Date: June 10, 2025.
  
