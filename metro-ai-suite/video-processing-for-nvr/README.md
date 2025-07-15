@@ -1,6 +1,5 @@
-# VPP SDK Sample Application
-Support users to quickly setup  the core concurrent video workload through configuration file to obtain the best performance of video decode, post-processing and display based on Intel® integrated GPU.
-Users can use the sample application multiview to complete runtime performance evaluation or as a reference for debugging core video workload issues.
+# Video Processing for NVR
+This sample application allows users to evaluate and optimize video processing workflows for NVR. Users can configure concurrent video processing, including video decode, post-processing, and concurrent display, utilizing the integrated GPUs. Users can also utilize application multiview to evaluate runtime performance or debug core video processing workload.
 
 ## Typical workloads
 Sample config files can be found in ./sample_config directory.
@@ -10,7 +9,7 @@ Sample config files can be found in ./sample_config directory.
 * Dynamic add one input stream in runtime 
 
 # Dependencies
-The sample application depends on VPPSDK and [live555](http://www.live555.com/)
+The sample application depends on VPP SDK and [live555](http://www.live555.com/)
 
 # Table of contents
 

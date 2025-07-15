@@ -56,6 +56,7 @@ The **Edge AI Suites** project is licensed under the [APACHE 2.0](LICENSE), exce
 |:-------------------|:--------|
 |[Smart Intersection](metro-ai-suite/smart-intersection) | [LIMITED EDGE SOFTWARE DISTRIBUTION LICENSE AGREEMENT](metro-ai-suite/smart-intersection/LICENSE.txt) |
 |[Holographic Sensor Fusion](metro-ai-suite/holographic-sensor-fusion) | [LIMITED EDGE SOFTWARE DISTRIBUTION LICENSE AGREEMENT](metro-ai-suite/holographic-sensor-fusion/LICENSE.txt) |
+|[Video Processing for NVR](metro-ai-suite/video-processing-for-nvr) | [LIMITED EDGE SOFTWARE DISTRIBUTION LICENSE AGREEMENT](metro-ai-suite/video-processing-for-nvr/LICENSE.txt) |
 
 Last Updated Date: June 10, 2025.
  
