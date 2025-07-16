@@ -17,7 +17,6 @@
    how-to-enable-mlops
    how-to-manage-pipelines
    how-to-scale-video-resolution
-   how-to-setup-helm-locally
    how-to-use-an-ai-model-and-video-file-of-your-own
    how-to-use-opcua-publisher
 
