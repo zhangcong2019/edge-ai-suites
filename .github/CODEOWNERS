@@ -25,8 +25,9 @@ README.md          @xwu2intel
 
 
 # documentation content - manufacturing-ai
-#/manufacturing-ai-suite/hmi-augmented-worker/docs/ - needs to be defined
-#/manufacturing-ai-suite/hmi-augmented-worker/README.md - needs to be defined
+/manufacturing-ai-suite/hmi-augmented-worker/docs                                  @hteeyeoh @madhuri-rai07 @bharagha      @open-edge-platform/open-edge-platform-docs-write
+/manufacturing-ai-suite/hmi-augmented-worker/README.md                             @hteeyeoh @madhuri-rai07 @bharagha      @open-edge-platform/open-edge-platform-docs-write
+
 /manufacturing-ai-suite/industrial-edge-insights-vision/docs/         @ajagadi1 @sugnanprabhu @rrajore @sajeevrajput   @open-edge-platform/open-edge-platform-docs-write
 /manufacturing-ai-suite/industrial-edge-insights-vision/README.md     @ajagadi1 @sugnanprabhu @rrajore @sajeevrajput   @open-edge-platform/open-edge-platform-docs-write
 /manufacturing-ai-suite/wind-turbine-anomaly-detection/docs/          @vkb1 @sathyendranv @pooja-intel                 @open-edge-platform/open-edge-platform-docs-write
