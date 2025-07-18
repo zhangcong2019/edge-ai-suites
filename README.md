@@ -61,6 +61,5 @@ The **Edge AI Suites** project is licensed under the [APACHE 2.0](LICENSE), exce
 |[Sensor Fusion For Traffic Management](metro-ai-suite/sensor-fusion-for-traffic-management) | [LIMITED EDGE SOFTWARE DISTRIBUTION LICENSE AGREEMENT](metro-ai-suite/sensor-fusion-for-traffic-management/LICENSE.txt) |
 |[Video Processing for NVR](metro-ai-suite/video-processing-for-nvr) | [LIMITED EDGE SOFTWARE DISTRIBUTION LICENSE AGREEMENT](metro-ai-suite/video-processing-for-nvr/LICENSE.txt) |
 
-
 Last Updated Date: June 10, 2025.
  
