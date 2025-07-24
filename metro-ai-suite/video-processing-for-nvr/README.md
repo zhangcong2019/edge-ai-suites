@@ -2,7 +2,7 @@
 This sample application allows users to evaluate and optimize video processing workflows for NVR. Users can configure concurrent video processing, including video decode, post-processing, and concurrent display, utilizing the integrated GPUs. Users can also utilize application multiview to evaluate runtime performance or debug core video processing workload.
 
 # Overview
-This sample application based on VPP SDK, user can configure workload with config file, svet will read the config file and run the user defined workload.
+This sample application based on VPP SDK, user can configure workload with config file, svet will read the config file and run the user defined workload.  
 Programming Language: C++  
 
 # How it works
@@ -19,10 +19,8 @@ The sample application depends on VPP SDK and [live555](http://www.live555.com/)
 ## Table of contents
 
   * [License](#license)
-  * [Documentation](#documentation)
   * [System requirements](#system-requirements)
   * [How to build](#how-to-build)
-    * [Build steps](#build-steps)
   * [Known limitations](#know-limitations)
 
 ## License
