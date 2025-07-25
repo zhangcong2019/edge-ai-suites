@@ -77,10 +77,6 @@ helm upgrade --install smart-intersection ./smart-intersection/chart \
 
 ## Access Application Services
 
-Use `kubectl port-forward` to access the application services on <protocol>://localhost:<service-port>
-For more available options, see [kubectl port-forward options](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_port-forward/#options)
-
-
 ### Access the Application UI using Node Port
 
 - Get the Node Port Number using following command and use it to access the Application UI
