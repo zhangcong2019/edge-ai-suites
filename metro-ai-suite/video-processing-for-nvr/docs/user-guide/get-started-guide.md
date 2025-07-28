@@ -59,9 +59,12 @@ vainfo: Supported profile and entrypoints
   
 Then you can try to run one VPP SDK API test.  
   
-Note:	Make sure there is at least one display connected to the device and switch to `root` before running the command below:  
+Note:	Make sure there is at least one display connected to the device and switch to `root` and `init 3` before running the command below:  
   
 ```
+# sudo init 3
+# sudo su
+
 # cd /opt/intel/vppsdk/bin
 # source /opt/intel/vppsdk/env.sh
 # export MULTI_DISPLAY_PATCH=1
@@ -92,7 +95,6 @@ $ export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 Then run build.sh to build the svet_app binary:  
   
 ```
-$ cd svet2
 $ ./build.sh
 ```
   
@@ -112,8 +114,8 @@ You can use `quit` or `Ctrl+C` to exit the application.
 Before running the sample application, make sure the environment variables are set correctly in the current bash:  
   
 ```
+# sudo init 3
 # sudo su
-# init 3
 # source /opt/intel/vppsdk/env.sh
 # export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 # export MULTI_DISPLAY_PATCH=1
