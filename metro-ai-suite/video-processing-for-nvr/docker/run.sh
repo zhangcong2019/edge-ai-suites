@@ -46,9 +46,10 @@ else
         --device /dev/dri \
         --group-add $VIDEO_GROUP_ID --group-add $RENDER_GROUP_ID \
         --user root \
+	--entrypoint /home/vpp/vppsample/docker/svet.sh \
         -e DISPLAY=$DISPLAY \
         -v /tmp/.X11-unix:/tmp/.X11-unix \
         -v $HOME/.Xauthority:/root/.Xauthority:rw \
         -w /home/vpp \
-        $DOCKER_IMAGE bash /home/vpp/vppsample/docker/svet.sh
+        $DOCKER_IMAGE
 fi
