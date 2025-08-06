@@ -11,6 +11,7 @@ RUN apt-get update && apt-get install -y \
     cmake \
     sudo \
     wget \
+    lsb-release \
     unzip
 
 RUN useradd -m -s /bin/bash vpp && \
