@@ -29,7 +29,7 @@ RUN bash /opt/intel/vppsdk/install_vppsdk_dependencies.sh
 RUN bash ./live555_install.sh
 
 RUN bash ./build.sh
-chmod +x /home/vpp/vppsample/docker/svet.sh
+RUN chmod +x /home/vpp/vppsample/docker/svet.sh
 
 USER vpp 
 WORKDIR /home/vpp
