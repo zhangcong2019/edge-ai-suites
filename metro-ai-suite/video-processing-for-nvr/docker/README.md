@@ -8,8 +8,7 @@
 **Software:**
 * VPP SDK
 
-## build docker image
-
+## build docker image  
 1. Install VPPSDK and dependencies  
 ```
     sudo -E wget -O- https://eci.intel.com/sed-repos/gpg-keys/GPG-PUB-KEY-INTEL-SED.gpg | sudo tee /usr/share/keyrings/sed-archive-keyring.gpg > /dev/null
@@ -22,13 +21,7 @@
 sudo bash /opt/intel/vppsdk/install_vppsdk_dependencies.sh
 source /opt/intel/vppsdk/env.sh
 ```
-2. Make sure docker is corrently installed and configured. Build docker image for reference application `build_sample.sh`
+2. Make sure docker is corrently installed and configured. Build docker image for reference application `bash build_sample.sh`  
 
-
-## run docker container
-4. Add /usr/local/lib to $LD_LIBRARY_PATH: export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
-   You shall add this export command to your .bashrc or need to run it before running svet_app 
-5. Basic test: 
-```
-./build/svet_app load sample_config/basic/1dec1disp.txt
-```
+## run docker container  
+1. Run docker container with a sample test: `bash run.sh`  
