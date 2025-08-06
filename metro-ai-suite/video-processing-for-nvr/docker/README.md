@@ -8,7 +8,7 @@
 **Software:**
 * VPP SDK
 
-## build docker image  
+## Build docker image  
 1. Install VPPSDK and dependencies  
 ```
 sudo -E wget -O- https://eci.intel.com/sed-repos/gpg-keys/GPG-PUB-KEY-INTEL-SED.gpg | sudo tee /usr/share/keyrings/sed-archive-keyring.gpg > /dev/null
@@ -21,7 +21,8 @@ sudo apt install intel-vppsdk
 sudo bash /opt/intel/vppsdk/install_vppsdk_dependencies.sh
 source /opt/intel/vppsdk/env.sh
 ```
-2. Make sure docker is corrently installed and configured. Build docker image for reference application `bash build_sample.sh`  
+2. Build docker image for reference application `bash build_sample.sh`  
+Make sure docker is corrently installed and configured. 
 
-## run docker container  
+## Run docker container  
 1. Run docker container with a sample test: `bash run.sh`  
