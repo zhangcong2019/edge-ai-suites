@@ -64,7 +64,7 @@ source /opt/intel/vppsdk/env.sh
 
 ## Known limitations
 
-The sample application has been validated on Intel® platforms Meteor Lake, Raptor Lake, Adler Lake and Tiger Lake 
+The sample application has been validated on Intel® platforms Arrow Lake, Meteor Lake, Raptor Lake, Adler Lake and Tiger Lake 
 
 
 # Learn More  
