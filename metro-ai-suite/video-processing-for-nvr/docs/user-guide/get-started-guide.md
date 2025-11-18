@@ -227,5 +227,5 @@ ctrl --cmd=stop  --time=0
 `xargs sudo rm < live555-master/build/install_manifest.txt`
 
 ### Uninstall VPP SDK
-`sudo rm -rf /opt/intel/vppsdk`
+`sudo rm -rf /opt/intel/vppsdk`  
 `sudo rm -rf /opt/intel/media`
