@@ -1,0 +1,11 @@
+--2025-11-04 19:17:49--  https://eci.intel.com/sed-repos/gpg-keys/GPG-PUB-KEY-INTEL-SED.gpg
+Resolving child-prc.intel.com (child-prc.intel.com)... 10.240.252.23
+Connecting to child-prc.intel.com (child-prc.intel.com)|10.240.252.23|:913... connected.
+Proxy request sent, awaiting response... 200 OK
+Length: 2292 (2.2K) [binary/octet-stream]
+Saving to: ‘STDOUT’
+
+-                                          0%[                                                                                ]       0  --.-KB/s               -                                        100%[===============================================================================>]   2.24K  --.-KB/s    in 0s      
+
+2025-11-04 19:17:50 (5.41 MB/s) - written to stdout [2292/2292]
+
