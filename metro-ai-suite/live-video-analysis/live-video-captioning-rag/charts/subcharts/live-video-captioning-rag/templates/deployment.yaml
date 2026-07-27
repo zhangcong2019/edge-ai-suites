@@ -50,6 +50,7 @@ spec:
               LLM_MODEL_ID_RAW={{ coalesce .Values.global.llmModel.modelId .Values.env.llmModel.modelId .Values.env.llmModelId "" | quote }}
               LLM_MODEL_TYPE={{ coalesce .Values.global.llmModel.modelType .Values.env.llmModel.modelType "llm" | quote }}
               LLM_WEIGHT_FORMAT={{ coalesce .Values.global.llmModel.weightFormat .Values.env.llmModel.weightFormat "" | quote }}
+              LLM_DEVICE={{ (ternary "GPU" "CPU" (or .Values.global.llmModel.useGPU.enabled .Values.env.llmModel.useGPU.enabled)) | quote }}
               if [ -z "$LLM_MODEL_ID_RAW" ]; then
                 echo "ERROR: global.llmModel.modelId must be set"
                 exit 1
@@ -57,16 +58,19 @@ spec:
 
               # Use the first model ID if a CSV list is provided.
               LLM_MODEL_ID="$(echo "$LLM_MODEL_ID_RAW" | cut -d',' -f1 | xargs)"
+              LLM_DEVICE_LOWER="$(echo "$LLM_DEVICE" | tr '[:upper:]' '[:lower:]')"
+              LLM_MODEL_OUTPUT_NAME="${LLM_DEVICE_LOWER}/${LLM_MODEL_ID}"
 
-              # Store models under the full modelId path (e.g. microsoft/Phi-3.5-mini-instruct).
-              MODEL_TARGET_DIR="/opt/data/llm_models/${LLM_MODEL_ID}"
+              # Store models under device/provider/model_name
+              # (e.g. gpu/microsoft/Phi-3.5-mini-instruct).
+              MODEL_TARGET_DIR="/opt/data/llm_models/${LLM_MODEL_OUTPUT_NAME}"
               if [ -d "$MODEL_TARGET_DIR" ] && [ -n "$(ls -A "$MODEL_TARGET_DIR" 2>/dev/null)" ]; then
                 echo "LLM output already exists at $MODEL_TARGET_DIR. Skipping download for $LLM_MODEL_ID"
               else
-                /config/download-models.sh "$LLM_MODEL_ID" "$LLM_MODEL_TYPE" "$LLM_WEIGHT_FORMAT" "$HF_TOKEN" "$LLM_MODEL_ID"
+                /config/download-models.sh "$LLM_MODEL_ID" "$LLM_MODEL_TYPE" "$LLM_WEIGHT_FORMAT" "$HF_TOKEN" "$LLM_MODEL_OUTPUT_NAME" "$LLM_DEVICE"
               fi
 
-              CACHE_TARGET_DIR="/tmp/model_cache/${LLM_MODEL_ID}"
+              CACHE_TARGET_DIR="/tmp/model_cache/${LLM_DEVICE_LOWER}/${LLM_MODEL_ID}"
               mkdir -p "$(dirname "$CACHE_TARGET_DIR")"
               rm -rf "$CACHE_TARGET_DIR"
               mkdir -p "$CACHE_TARGET_DIR"
@@ -81,6 +85,8 @@ spec:
               value: {{ .Values.global.huggingface.apiToken | quote }}
             - name: LLM_MODEL_ID
               value: {{ .Values.global.llmModel.modelId | quote }}
+            - name: LLM_DEVICE
+              value: {{ (ternary "GPU" "CPU" (or .Values.global.llmModel.useGPU.enabled .Values.env.llmModel.useGPU.enabled)) | quote }}
             - name: http_proxy
               value: {{ .Values.global.httpProxy | quote }}
             - name: https_proxy
@@ -208,7 +214,7 @@ spec:
             defaultMode: 0777
         - name: shared-helper
           configMap:
-            name: model-download-helper
+            name: rag-model-download-helper
             defaultMode: 0777
         - name: llm-cache
           emptyDir: {}
