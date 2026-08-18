@@ -49,6 +49,9 @@ Integration mode that connects to a running instance of the UAV Mission Compute 
 - [QGroundControl](./how-to-guides/qgroundcontrol.md) — Configure QGroundControl to receive the UAV Vision Analytics video stream
 - [Troubleshooting](./how-to-guides/troubleshooting.md) — Common issues and fixes for deployment, inference, and streaming problems
 
+# AI Agent Skills
+
+This application supports AI agent skills for GitHub Copilot and compatible coding agents. Skills cover operational tasks (running pipelines, benchmarking, troubleshooting) and application creation (scaffolding new pymavlink or UAVSDK stacks).
 
 # Intended and Responsible Use
 
